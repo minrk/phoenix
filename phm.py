@@ -129,8 +129,11 @@ HALF_HEIGHT=100.0
 YMAX     = 5000.0    #5000 mV
 
 
-device_list = ['/dev/ttyS0','/dev/ttyS1','/dev/tts/USB0','/dev/tts/USB1',\
-    '/dev/ttyUSB0','/dev/ttyUSB1',0,1,2,3]
+import glob
+device_list = []
+for g in ('/dev/ttyS*', '/dev/tts/USB*', '/dev/ttyUSB*', '/dev/tty.usb*'):
+    device_list.extend(glob.glob(g))
+device_list.extend(range(4))
 
 logfile = None	     # To keep track of Hardware connection failures
 
